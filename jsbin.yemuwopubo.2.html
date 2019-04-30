@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2019 by anonymous (http://jsbin.com/yemuwopubo/2/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+  <title>JS Bin</title>
+<style id="jsbin-css">
+.done{
+  color:green;
+}
+</style>
+</head>
+<body>
+  <div id="app">
+     <input type="text" v-model="newTask">
+    <button v-on:click="addTask()">add</button>
+    <ul>
+      <li v-for="(task,index) in tasks"
+          v-bind:class="{done:task.done}">
+            <input type="checkbox" v-model="task.done">
+        {{task.text}}
+        <button v-on:click="deleteTask(index)">x</button>
+          </li>
+    </ul>
+  </div>
+
+<script id="jsbin-javascript">
+var app = new Vue({
+  el : '#app',
+  data : {
+    newTask : '',
+    tasks : [
+      {
+      text: 'PHP',
+      done: true
+      },
+      {
+        text:'Java',
+        done:false
+      } 
+            ]
+    
+  },
+  methods:{
+    addTask : function(){
+      this.tasks.push({
+        text:this.newTask,
+        done:false});
+      this.newTask = '';
+    },
+    deleteTask : function(index){
+    this.tasks.splice(index,1);
+  }
+  }
+})
+
+
+
+</script>
+</body>
+</html>
